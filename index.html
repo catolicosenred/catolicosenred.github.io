@@ -41,17 +41,19 @@
   <script src="frases.js"></script>
   <script>
     const texto = document.getElementById("frase");
-    let i = 0;
-    
-    // Mostrar la primera frase
-    texto.textContent = frases[i];
 
-    // Cambiar frase cada 20 segundos
-    setInterval(() => {
-      i = (i + 1) % frases.length;
-      texto.textContent = frases[i];
-    }, 20000);
+  function mostrarFraseAleatoria() {
+    const indice = Math.floor(Math.random() * frases.length);
+    texto.textContent = frases[indice];
+  }
+
+  // Mostrar una frase al iniciar
+  mostrarFraseAleatoria();
+
+  // Cambiar frase cada 20 segundos
+  setInterval(mostrarFraseAleatoria, 20000);
   </script>
 </body>
 </html>
+
 
