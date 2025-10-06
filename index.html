@@ -42,18 +42,39 @@
   <script>
     const texto = document.getElementById("frase");
 
-  function mostrarFraseAleatoria() {
-    const indice = Math.floor(Math.random() * frases.length);
-    texto.textContent = frases[indice];
+// Copiar y barajar el arreglo de frases
+let frasesRestantes = [...frases];
+
+function barajar(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// Inicializar la lista barajada
+barajar(frasesRestantes);
+
+function mostrarFrase() {
+  if (frasesRestantes.length === 0) {
+    // Si ya se mostraron todas, volver a barajar
+    frasesRestantes = [...frases];
+    barajar(frasesRestantes);
   }
 
-  // Mostrar una frase al iniciar
-  mostrarFraseAleatoria();
+  // Tomar la última frase del arreglo y mostrarla
+  const frase = frasesRestantes.pop();
+  texto.textContent = frase;
+}
 
-  // Cambiar frase cada 20 segundos
-  setInterval(mostrarFraseAleatoria, 20000);
+// Mostrar una frase al iniciar
+mostrarFrase();
+
+// Cambiar frase cada 20 segundos
+setInterval(mostrarFrase, 20000);
   </script>
 </body>
 </html>
+
 
 
