@@ -23,58 +23,56 @@
       text-align: center;
       width: 80%;
       line-height: 1.3;
-      animation: fadeinout 20s infinite;
       text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.3);
-    }
-
-    @keyframes fadeinout {
-      0% {opacity: 0;}
-      10% {opacity: 1;}
-      90% {opacity: 1;}
-      100% {opacity: 0;}
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
     }
   </style>
 </head>
 <body>
-  <div id="frase">✨ Dios te ama, aunque a veces lo olvides.</div>
+  <div id="frase"></div>
 
+  <!-- Archivo de frases -->
   <script src="frases.js"></script>
   <script>
     const texto = document.getElementById("frase");
 
-// Copiar y barajar el arreglo de frases
-let frasesRestantes = [...frases];
+    // Copiar y barajar el arreglo de frases
+    let frasesRestantes = [...frases];
 
-function barajar(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
+    function barajar(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
 
-// Inicializar la lista barajada
-barajar(frasesRestantes);
-
-function mostrarFrase() {
-  if (frasesRestantes.length === 0) {
-    // Si ya se mostraron todas, volver a barajar
-    frasesRestantes = [...frases];
     barajar(frasesRestantes);
-  }
 
-  // Tomar la última frase del arreglo y mostrarla
-  const frase = frasesRestantes.pop();
-  texto.textContent = frase;
-}
+    function mostrarFrase() {
+      if (frasesRestantes.length === 0) {
+        frasesRestantes = [...frases];
+        barajar(frasesRestantes);
+      }
 
-// Mostrar una frase al iniciar
-mostrarFrase();
+      const frase = frasesRestantes.pop();
+      texto.textContent = frase;
+      texto.style.opacity = 1; // Fade in
 
-// Cambiar frase cada 20 segundos
-setInterval(mostrarFrase, 20000);
+      // Después de 15 segundos, fade out y limpiar texto
+      setTimeout(() => {
+        texto.style.opacity = 0;
+        setTimeout(() => {
+          texto.textContent = ''; // Vaciar durante 5 segundos
+        }, 1000); // Tiempo de fade out
+      }, 15000); // Mostrar la frase 15 segundos
+    }
+
+    // Mostrar primera frase
+    mostrarFrase();
+
+    // Cambiar frase cada 20 segundos (15s visible + 5s sin texto)
+    setInterval(mostrarFrase, 20000);
   </script>
 </body>
 </html>
-
-
-
