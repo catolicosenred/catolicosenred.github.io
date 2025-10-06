@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frases Católicas</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #frase {
+      font-family: "Georgia", serif;
+      font-size: 2.2em;
+      color: #f7e7b5;
+      text-align: center;
+      width: 80%;
+      line-height: 1.3;
+      animation: fadeinout 20s infinite;
+      text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.3);
+    }
+
+    @keyframes fadeinout {
+      0% {opacity: 0;}
+      10% {opacity: 1;}
+      90% {opacity: 1;}
+      100% {opacity: 0;}
+    }
+  </style>
+</head>
+<body>
+  <div id="frase">✨ Dios te ama, aunque a veces lo olvides.</div>
+
+  <script>
+    const frases = [
+      "✨ Dios te ama, aunque a veces lo olvides.",
+      "🙏 Confía en el Señor, incluso cuando no veas el camino.",
+      "💛 La fe no hace las cosas fáciles, las hace posibles.",
+      "📿 María, Madre de Dios, ruega por nosotros.",
+      "🌿 Jesús es la luz que nunca se apaga.",
+      "🕊️ La oración es el puente que une tu corazón con el cielo.",
+      "🔥 Donde hay fe, hay milagros.",
+      "💫 No temas, Cristo camina contigo.",
+      "💐 Ora con amor, y el amor te responderá.",
+      "🌸 Todo lo que sucede tiene un propósito en los planes de Dios."
+    ];
+
+    let i = 0;
+    const texto = document.getElementById("frase");
+
+    setInterval(() => {
+      i = (i + 1) % frases.length;
+      texto.textContent = frases[i];
+    }, 20000); // cambia cada 20 segundos
+  </script>
+</body>
+</html>
